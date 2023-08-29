@@ -32,16 +32,16 @@ def process_dipstick(image):
     imS = cv2.resize(image, (38, 638))  # Resize the image
 
     #koordinat masing2 paramater uji
-    crop_1=imS[15:35,10:25]#Parameter 1()
-    crop_2=imS[65:85,10:25]#Parameter 2()
-    crop_3=imS[115:135,10:25]#Parameter 3()
-    crop_4=imS[165:185,10:25]#Parameter 4()
-    crop_5=imS[215:235,10:25]#Parameter 5()
-    crop_6=imS[265:285,10:25]#Parameter 6()
-    crop_7=imS[315:335,10:25]#Parameter 7()
-    crop_8=imS[365:385,10:25]#Parameter 8()
-    crop_9=imS[415:435,10:25]#Parameter 9()
-    crop_10=imS[465:485,10:25]#Parameter 10()
+    crop_1=imS[15:35,10:25]     #Parameter 1()
+    crop_2=imS[65:85,10:25]     #Parameter 2()
+    crop_3=imS[115:135,10:25]   #Parameter 3()
+    crop_4=imS[165:185,10:25]   #Parameter 4()
+    crop_5=imS[215:235,10:25]   #Parameter 5()
+    crop_6=imS[265:285,10:25]   #Parameter 6()
+    crop_7=imS[315:335,10:25]   #Parameter 7()
+    crop_8=imS[365:385,10:25]   #Parameter 8()
+    crop_9=imS[415:435,10:25]   #Parameter 9()
+    crop_10=imS[465:485,10:25]  #Parameter 10()
     koordinat = [crop_1, crop_2, crop_3, crop_4, crop_5, crop_6, crop_7, crop_8, crop_9, crop_10]
 
     # Define a dictionary to store parameter labels
@@ -150,4 +150,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # ini komentar
