@@ -4,6 +4,13 @@ import pandas as pd
 from sklearn import neighbors
 import streamlit as st
 
+hide_st_style = """ 
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True) # hide streamlit menu
 
 def rectangle(image):
     # draw rectangle into original image
@@ -54,7 +61,6 @@ def process_dipstick(image):
     dipstick_result = {}
 
     for nomor, i in enumerate(koordinat, start=1):
-        print("Processing crop:", nomor)
         img = cv2.cvtColor(i, cv2.COLOR_BGR2RGB)
     
         lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
@@ -99,7 +105,7 @@ def main():
     if uploaded_image is not None:
         image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), 1)
 
-        col1, col2 = st.columns([1, 4])
+        col1, col2 = st.columns([3, 4])
         
         with col1:
             # Process the image and draw rectangles
@@ -115,12 +121,19 @@ def main():
         with col2:
             result = process_dipstick(image)
             st.write("Results:")
-            
+
             # Create a DataFrame for the results
             result_df = pd.DataFrame(result.items(), columns=["Parameter", "Value"])
             result_df['Value'] = result_df['Value'].apply(lambda x: x[0][0])  # Extracting the value from the 2D array
+            
+            # Convert the 'Value' column to string
+            result_df['Value'] = result_df['Value'].astype(str)
+            
             result_df.index = result_df.index + 1
-            st.dataframe(result_df) 
+            st.dataframe(result_df)
+
+    else:
+        st.warning("Masukkan hanya gambar dipstick yang telah dicrop")
 
 
 if __name__ == "__main__":
