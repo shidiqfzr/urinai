@@ -5,6 +5,22 @@ from sklearn import neighbors
 import streamlit as st
 
 
+def rectangle(image):
+    # draw rectangle into original image
+    imgR = cv2.resize(image, (38, 638)) 
+    cv2.rectangle(imgR, (25, 35), (10, 15), (0, 0, 255), 1)   # Parameter 1
+    cv2.rectangle(imgR, (25, 85), (10, 65), (0, 0, 255), 1)   # Parameter 2
+    cv2.rectangle(imgR, (25, 135), (10, 115), (0, 0, 255), 1) # Parameter 3
+    cv2.rectangle(imgR, (25, 185), (10, 165), (0, 0, 255), 1) # Parameter 4
+    cv2.rectangle(imgR, (25, 235), (10, 215), (0, 0, 255), 1) # Parameter 5
+    cv2.rectangle(imgR, (25, 285), (10, 265), (0, 0, 255), 1) # Parameter 5
+    cv2.rectangle(imgR, (25, 335), (10, 315), (0, 0, 255), 1) # Parameter 7
+    cv2.rectangle(imgR, (25, 385), (10, 365), (0, 0, 255), 1) # Parameter 8
+    cv2.rectangle(imgR, (25, 435), (10, 415), (0, 0, 255), 1) # Parameter 9
+    cv2.rectangle(imgR, (25, 485), (10, 465), (0, 0, 255), 1) # Parameter 10
+
+    return imgR
+
 def process_dipstick(image):
     imS = cv2.resize(image, (38, 638))  # Resize the image
 
@@ -20,19 +36,6 @@ def process_dipstick(image):
     crop_9=imS[415:435,10:25]#Parameter 9()
     crop_10=imS[465:485,10:25]#Parameter 10()
     koordinat = [crop_1, crop_2, crop_3, crop_4, crop_5, crop_6, crop_7, crop_8, crop_9, crop_10]
-
-
-    # draw rectangle into original image
-    cv2.rectangle(imS, (25, 35), (10, 15), (0, 0, 255), 1)    # Parameter 1
-    cv2.rectangle(imS, (25, 85), (10, 65), (0, 0, 255), 1)   # Parameter 2
-    cv2.rectangle(imS, (25, 135), (10, 115), (0, 0, 255), 1)  # Parameter 3
-    cv2.rectangle(imS, (25, 185), (10, 165), (0, 0, 255), 1) # Parameter 4
-    cv2.rectangle(imS, (25, 235), (10, 215), (0, 0, 255), 1) # Parameter 5
-    cv2.rectangle(imS, (25, 285), (10, 265), (0, 0, 255), 1) # Parameter 6
-    cv2.rectangle(imS, (25, 335), (10, 315), (0, 0, 255), 1) # Parameter 7
-    cv2.rectangle(imS, (25, 385), (10, 365), (0, 0, 255), 1) # Parameter 8
-    cv2.rectangle(imS, (25, 435), (10, 415), (0, 0, 255), 1) # Parameter 9
-    cv2.rectangle(imS, (25, 485), (10, 465), (0, 0, 255), 1) # Parameter 10
 
     # Define a dictionary to store parameter labels
     parameter_labels = {
@@ -95,15 +98,29 @@ def main():
 
     if uploaded_image is not None:
         image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), 1)
-        result = process_dipstick(image)
-        st.image(image)
-        st.write("Results:")
-        
-        # Create a DataFrame for the results
-        result_df = pd.DataFrame(result.items(), columns=["Parameter", "Value"])
-        result_df['Value'] = result_df['Value'].apply(lambda x: x[0][0])  # Extracting the value from the 2D array
 
-        st.dataframe(result_df)
+        col1, col2 = st.columns([1, 4])
+        
+        with col1:
+            # Process the image and draw rectangles
+            image = rectangle(image)
+        
+            # Convert BGR image to RGB format
+            rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            
+            # Display the RGB image
+            st.image(rgb_image)
+            
+
+        with col2:
+            result = process_dipstick(image)
+            st.write("Results:")
+            
+            # Create a DataFrame for the results
+            result_df = pd.DataFrame(result.items(), columns=["Parameter", "Value"])
+            result_df['Value'] = result_df['Value'].apply(lambda x: x[0][0])  # Extracting the value from the 2D array
+            result_df.index = result_df.index + 1
+            st.dataframe(result_df) 
 
 
 if __name__ == "__main__":
