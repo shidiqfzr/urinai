@@ -79,7 +79,6 @@ def process_dipstick(image):
         parameter_label = parameter_labels[nomor]
         dipstick_result[parameter_label] = hasilLAB
         
-    
     return dipstick_result
 
 def predict_leukocyte(leukocyte_result):
@@ -127,6 +126,7 @@ def predict_protein(protein_result):
         return "Ini menunjukkan tingkat protein yang lebih tinggi lagi dalam urin. Ini dapat mengindikasikan kondisi kesehatan yang lebih serius, seperti kerusakan ginjal yang lebih lanjut atau penyakit ginjal yang berpotensi lebih kompleks."
     elif protein_result == "++++":
         return "Ini indikasi serius dari masalah ginjal atau masalah kesehatan lainnya yang memengaruhi fungsi ginjal."
+
 def predict_ph(ph_result):
     if ph_result == "5,0":
         return "pH sangat asam, Ini mengindikasikan potensi masalah medis atau masalah diet tertentu."
@@ -159,4 +159,3 @@ def predict_blood(blood_result):
     elif blood_result == "50":
         return ""
     
-
