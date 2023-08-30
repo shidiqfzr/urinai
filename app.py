@@ -74,7 +74,7 @@ def main():
             selected = option_menu(
                 menu_title="Main Menu",
                 options=["Analysis", "Chabot"],
-                icons=["clipboard plus", "robot"],
+                icons=["clipboard-plus", "robot"],
                 menu_icon="cast",
                 default_index=0
             )
