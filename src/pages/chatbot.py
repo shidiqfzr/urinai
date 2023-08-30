@@ -2,7 +2,7 @@ import openai
 import streamlit as st
 
 def chatbot():
-    st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Dipstick Analysis</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Health Bot</h1>", unsafe_allow_html=True)
 
     openai.api_key = st.secrets["OPENAI_API_KEY"]
 
