@@ -73,7 +73,7 @@ def main():
     with st.sidebar:
             selected = option_menu(
                 menu_title="Main Menu",
-                options=["Analysis", "Chabot"],
+                options=["Analysis", "Chatbot"],
                 icons=["clipboard-plus", "robot"],
                 menu_icon="cast",
                 default_index=0
