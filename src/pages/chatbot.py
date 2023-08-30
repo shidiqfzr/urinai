@@ -1,7 +1,7 @@
 import openai
 import streamlit as st
 
-def chabot():
+def chatbot():
     st.title("Health Bot")
 
     openai.api_key = st.secrets["OPENAI_API_KEY"]
