@@ -2,8 +2,10 @@ import cv2
 import numpy as np
 import pandas as pd
 import streamlit as st
+from streamlit_option_menu import option_menu
 
-from src.python.predict import rectangle, process_dipstick
+from src.pages.predict import rectangle, process_dipstick
+from src.pages.chatbot import chatbot
 
 hide_st_style = """ 
             <style>
@@ -13,7 +15,7 @@ hide_st_style = """
             """
 st.markdown(hide_st_style, unsafe_allow_html=True) # hide streamlit menu
     
-def main():
+def dipstick_analysis():
     st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Dipstick Analysis</h1>", unsafe_allow_html=True)
     st.write("Unggah gambar dan dapatkan hasil")
 
@@ -66,6 +68,22 @@ def main():
     
     else:
         st.warning("Masukkan hanya gambar dipstick yang telah dicrop")
+
+def main():
+    with st.sidebar:
+            selected = option_menu(
+                menu_title="Main Menu",
+                options=["Analysis", "Chabot"],
+                icons=["clipboard plus", "robot"],
+                menu_icon="cast",
+                default_index=0
+            )
+
+    if selected == "Analysis":
+        dipstick_analysis()
+    
+    elif selected == "Chatbot":
+        chatbot()
 
 if __name__ == "__main__":
     main()
