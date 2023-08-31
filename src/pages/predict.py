@@ -157,5 +157,58 @@ def predict_blood(blood_result):
     elif blood_result == "5-10":
         return "Ini menunjukkan jumlah sel darah merah yang cukup banyak"
     elif blood_result == "50":
-        return ""
+        return "Jumlah darah ini mengindikasikan jumlah yang lebih tinggi dalam urin, yang dapat mengindikasikan masalah yang lebih serius. Kemungkinan penyebab mungkin termasuk infeksi saluran kemih yang lebih parah, peradangan yang signifikan pada ginjal atau saluran kemih, batu ginjal yang lebih besar atau menyebabkan kerusakan, cedera pada ginjal, atau masalah darah yang mempengaruhi aliran darah ke ginjal. Angka ini mengarah pada potensi masalah yang memerlukan penanganan medis lebih lanjut untuk mengidentifikasi penyebab dan merencanakan tindakan yang sesuai."
+
+def predict_specificgravity(specificgravity_result):
+    if specificgravity_result == "1000":
+        return "Ini menunjukkan urin yang sangat encer, dan bisa mengindikasikan bahwa seseorang mungkin dalam kondisi yang sangat terhidrasi."
+    elif specificgravity_result == "1005":
+        return "Ini masih dianggap urin yang encer, dan bisa mengindikasikan kondisi di mana seseorang cukup terhidrasi."
+    elif specificgravity_result == "1010":
+        return "Ini mengindikasikan urin yang cukup encer, tetapi mulai sedikit lebih pekat daripada sebelumnya. Ini mungkin menunjukkan bahwa seseorang memiliki keseimbangan cairan yang cukup baik."
+    elif specificgravity_result == "1015":
+        return "Ini bisa mengindikasikan bahwa seseorang sedang dalam kondisi normal dalam hal keseimbangan cairan."
+    elif specificgravity_result == "1020":
+        return "Ini bisa mengindikasikan bahwa seseorang mungkin sedang dalam keadaan normal tetapi sedikit terhidrasi."
+    elif specificgravity_result == "1025":
+        return "Ini mungkin mengindikasikan bahwa seseorang sedang mengalami dehidrasi ringan atau memiliki konsentrasi zat terlarut dalam urin yang lebih tinggi."
+    elif specificgravity_result == "1030":
+        return "Ini bisa mengindikasikan dehidrasi yang lebih serius atau kondisi medis yang memengaruhi keseimbangan cairan dan elektrolit."
+
+def predict_ketone(ketone_result):
+    if ketone_result == "NEGATIF":
+        return "Ini mengindikasikan bahwa urin tidak mengandung keton dalam jumlah yang dapat dideteksi oleh tes ini. Ini adalah hasil yang diharapkan dalam keadaan normal."
+    elif ketone_result == "+/-":
+        return "Ini bisa mengindikasikan bahwa tubuh mungkin sedang memecah lemak untuk energi, tetapi level keton masih dalam kisaran normal atau rendah."
+    elif ketone_result == "+":
+        return "Ini bisa mengindikasikan bahwa tubuh sedang memproduksi lebih banyak keton sebagai sumber energi, dan ini mungkin terkait dengan diet rendah karbohidrat, puasa, atau keadaan lain yang mempengaruhi metabolisme lemak."
+    elif ketone_result == "++":
+        return "Ini bisa mengindikasikan peningkatan yang lebih signifikan dalam produksi keton dalam tubuh dan dapat mengindikasikan kondisi seperti ketoasidosis ringan."
+    elif ketone_result == "+++":
+        return "Ini dapat mengindikasikan peningkatan yang lebih signifikan dalam produksi keton dan mungkin menunjukkan kondisi seperti ketoasidosis yang lebih parah."
+    elif ketone_result == "++++":
+        return "Ini adalah indikasi serius dan dapat mengindikasikan ketoasidosis yang signifikan, yang memerlukan penanganan medis segera."
     
+def predict_bilirubin(bilirubin_result):
+    if bilirubin_result == "NEGATIF":
+        return "Ini mengindikasikan bahwa urin tidak mengandung bilirubin, Biasanya, bilirubin tidak ditemukan dalam urin karena memang normalnya tidak ada."
+    elif bilirubin_result == "+":
+        return "Ini bisa mengindikasikan adanya masalah dalam hati atau saluran empedu, yang dapat mengakibatkan peningkatan kadar bilirubin dalam darah dan kemudian muncul dalam urin."
+    elif bilirubin_result == "++":
+        return "Ini dapat mengindikasikan masalah yang lebih serius dalam hati atau saluran empedu yang mempengaruhi kemampuan mereka untuk memproses bilirubin dengan baik."
+    elif bilirubin_result == "+++":
+        return "Ini menunjukkan konsentrasi bilirubin yang lebih tinggi lagi dalam urin. Ini bisa mengindikasikan masalah yang lebih serius dalam hati atau saluran empedu yang memerlukan perhatian medis lebih lanjut."
+
+def predict_glukosa(glukosa_result):
+    if glukosa_result == "NEGATIF":
+        return "Ini mengindikasikan bahwa urin tidak mengandung glukosa dalam jumlah yang dapat dideteksi oleh tes ini. Biasanya, glukosa tidak ditemukan dalam urin sehat."
+    elif glukosa_result == "+/-":
+        return "Ini bisa mengindikasikan bahwa kadar glukosa dalam darah mungkin sedikit meningkat, tetapi masih dalam kisaran normal."
+    elif glukosa_result == "+":
+        return "Ini menunjukkan adanya glukosa dalam urin dalam jumlah terdeteksi. Ini bisa mengindikasikan bahwa kadar glukosa dalam darah mungkin lebih tinggi dari biasanya. Hal ini dapat terjadi pada kondisi seperti diabetes."
+    elif glukosa_result == "++":
+        return "Ini dapat mengindikasikan peningkatan yang lebih signifikan dalam kadar glukosa darah, yang bisa menunjukkan masalah seperti diabetes yang lebih serius."
+    elif glukosa_result == "+++":
+        return "Ini bisa mengindikasikan peningkatan yang lebih signifikan lagi dalam kadar glukosa darah, dan memerlukan evaluasi medis lebih lanjut."
+    elif glukosa_result == "++++":
+        return "Ini mengindikasikan adanya kadar glukosa darah yang sangat tinggi, yang bisa sangat serius dan mengindikasikan kondisi diabetes yang perlu ditangani dengan cepat."
