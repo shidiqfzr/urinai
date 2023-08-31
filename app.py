@@ -24,7 +24,10 @@ def dipstick_analysis():
     if uploaded_image is not None:
         image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), 1)
 
-        col1, col2 = st.columns([1, 6])
+        st.write("Analysis Results:")
+
+        col1, col2 = st.columns([1, 10])
+
         
         with col1:
             # Process the image and draw rectangles
@@ -39,7 +42,6 @@ def dipstick_analysis():
 
         with col2:
             result = process_dipstick(image)
-            st.write("Results:")
 
             # Create a DataFrame for the results
             result_df = pd.DataFrame(result.items(), columns=["Parameter", "Value"])
@@ -54,16 +56,12 @@ def dipstick_analysis():
                                           else "", axis=1)
 
 
-
             # Convert the 'Value' column to string
             result_df['Value'] = result_df['Value'].astype(str)
-
-            result_df.index = result_df.index + 1
-
-            # Adjust display settings to show complete content of 'Keterangan' column
-            pd.set_option('display.max_colwidth', None)
             
-            st.dataframe(result_df)
+            result_df.index = result_df.index + 1
+            
+            st.table(result_df)
     
     else:
         st.warning("Masukkan hanya gambar dipstick yang telah dicrop")
