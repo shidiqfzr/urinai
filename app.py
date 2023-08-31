@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-from src.pages.predict import rectangle, process_dipstick, predict_leukocyte, predict_nitrit, predict_urobilinogen, predict_protein, predict_ph, predict_blood
+from src.pages.predict import rectangle, process_dipstick, predict_leukocyte, predict_nitrit, predict_urobilinogen, predict_protein, predict_ph, predict_blood, predict_specificgravity, predict_ketone, predict_bilirubin, predict_glukosa
 from src.pages.chatbot import chatbot
 
 hide_st_style = """ 
@@ -53,6 +53,10 @@ def dipstick_analysis():
                                           else predict_protein(row['Value']) if row['Parameter'] == 'PROTEIN'
                                           else predict_ph(row['Value']) if row['Parameter'] == 'pH'
                                           else predict_blood(row['Value']) if row['Parameter'] == 'BLOOD'
+                                          else predict_specificgravity(row['Value']) if row['Parameter'] == 'SG'
+                                          else predict_ketone(row['Value']) if row['Parameter'] == 'KETON'
+                                          else predict_bilirubin(row['Value']) if row['Parameter'] == 'BILIRUBIN'
+                                          else predict_glukosa(row['Value']) if row['Parameter'] == 'GLUKOSA'
                                           else "", axis=1)
 
 
