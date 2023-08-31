@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-from src.pages.predict import rectangle, process_dipstick
+from src.pages.predict import rectangle, process_dipstick, predict_leukocyte, predict_nitrit, predict_urobilinogen, predict_protein, predict_ph, predict_blood
 from src.pages.chatbot import chatbot
 
 hide_st_style = """ 
@@ -24,7 +24,7 @@ def dipstick_analysis():
     if uploaded_image is not None:
         image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), 1)
 
-        col1, col2 = st.columns([1, 4])
+        col1, col2 = st.columns([1, 6])
         
         with col1:
             # Process the image and draw rectangles
@@ -45,25 +45,24 @@ def dipstick_analysis():
             result_df = pd.DataFrame(result.items(), columns=["Parameter", "Value"])
             result_df['Value'] = result_df['Value'].apply(lambda x: x[0][0])  # Extracting the value from the 2D array
             
+            result_df['Keterangan'] = result_df.apply(lambda row: predict_leukocyte(row['Value']) if row['Parameter'] == 'LEUKOSIT'
+                                          else predict_nitrit(row['Value']) if row['Parameter'] == 'NITRIT'
+                                          else predict_urobilinogen(row['Value']) if row['Parameter'] == 'UROBILINOGEN'
+                                          else predict_protein(row['Value']) if row['Parameter'] == 'PROTEIN'
+                                          else predict_ph(row['Value']) if row['Parameter'] == 'pH'
+                                          else predict_blood(row['Value']) if row['Parameter'] == 'BLOOD'
+                                          else "", axis=1)
+
+
+
             # Convert the 'Value' column to string
             result_df['Value'] = result_df['Value'].astype(str)
 
-            # Add 'Keterangan' column based on the parameter's value
-            result_df['Keterangan'] = ""
-
-            for idx, row in result_df.iterrows():
-                param = row['Parameter']
-                value = row['Value']
-
-                # if param == "LEUKOSIT":
-                #     result_df.at[idx, 'Keterangan'] = predict_leukocyte(value)
-                # elif param == "NITRIT":
-                #     result_df.at[idx, 'Keterangan'] = predict_nitrit(value)
-                # elif param == "UROBILINOGEN":
-                #     result_df.at[idx, 'Keterangan'] = predict_urobilinogen(value)
-                # Add conditions for other parameters here
-
             result_df.index = result_df.index + 1
+
+            # Adjust display settings to show complete content of 'Keterangan' column
+            pd.set_option('display.max_colwidth', None)
+            
             st.dataframe(result_df)
     
     else:
