@@ -2,7 +2,7 @@ import openai
 import streamlit as st
 
 def chatbot():
-    st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Health Bot</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Healthbot</h1>", unsafe_allow_html=True)
 
     openai.api_key = st.secrets["OPENAI_API_KEY"]
 
@@ -16,7 +16,7 @@ def chatbot():
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    if (prompt := st.chat_input("What is up?")):
+    if prompt := st.chat_input("Kirim pesan"):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
@@ -32,8 +32,7 @@ def chatbot():
                 ],
                 stream=True,
             ):
-                full_response += response.choices[0].get("message", {}).get("content", "")
-                message_placeholder.markdown(full_response + "▌")
+                full_response += response.choices[0].delta.get("content", "")
+                message_placeholder.markdown(full_response + " ")
             message_placeholder.markdown(full_response)
         st.session_state.messages.append({"role": "assistant", "content": full_response})
-
