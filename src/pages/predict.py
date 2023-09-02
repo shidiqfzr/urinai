@@ -118,7 +118,7 @@ def predict_bilirubin(bilirubin_result):
 
 def predict_glukosa(glukosa_result):
     if glukosa_result == "NEGATIF":
-        return "Ini mengindikasikan bahwa urin tidak mengandung glukosa dalam jumlah yang dapat dideteksi oleh tes ini. Biasanya, glukosa tidak ditemukan dalam urin sehat."
+        return "Ini mengindikasikan bahwa urin tidak mengandung glukosa. Biasanya, glukosa tidak ditemukan dalam urin sehat."
     elif glukosa_result == "+/-":
         return "Ini bisa mengindikasikan bahwa kadar glukosa dalam darah mungkin sedikit meningkat, tetapi masih dalam kisaran normal."
     elif glukosa_result == "+":
