@@ -18,35 +18,35 @@ def predict_nitrit(nitrit_result):
 
 def predict_urobilinogen(urobilinogrn_result):
     if urobilinogrn_result == "0.2 (Neg)":
-        return "Tidak ada atau kadar sangat rendah urobilinogen dalam urine. Ini biasanya merupakan hasil normal dan menunjukkan kesehatan normal dalam hal metabolisme bilirubin."
+        return "Tidak ada atau kadar sangat rendah urobilinogen dalam urine, menunjukkan kesehatan normal dalam hal metabolisme bilirubin."
     elif urobilinogrn_result == "1 (Neg)":
-        return "Tidak ada atau kadar sangat rendah urobilinogen dalam urine. Ini biasanya merupakan hasil normal dalam hal metabolisme bilirubin."
+        return "Tidak ada atau kadar sangat rendah urobilinogen dalam urine, merupakan hasil normal dalam hal metabolisme bilirubin."
     elif urobilinogrn_result == "2 (Pos)":
-        return "Terindentifikasi adanya kadar urobilinogen yang sedikit lebih tinggi dalam urine. Ini bisa disebabkan oleh beberapa faktor seperti metabolisme bilirubin yang lebih tinggi atau interaksi dengan obat-obatan tertentu."
+        return "Terindentifikasi adanya kadar urobilinogen yang sedikit lebih tinggi dalam urine, dapat disebabkan oleh beberapa faktor seperti metabolisme bilirubin yang lebih tinggi atau interaksi dengan obat-obatan tertentu."
     elif urobilinogrn_result == "4 (Pos)":
-        return "Peningkatan lebih lanjut pada kadar urobilinogen dalam urine. Bisa mengindikasikan adanya faktor yang lebih signifikan yang mempengaruhi metabolisme bilirubin."
+        return "Peningkatan lebih lanjut pada kadar urobilinogen dalam urine, terindentifikasi adanya faktor yang lebih signifikan yang mempengaruhi metabolisme bilirubin."
     elif urobilinogrn_result == "8 (Pos)":
-        return "Konsentrasi urobilinogen yang lebih tinggi dalam urine. Bisa menunjukkan masalah yang lebih serius dalam metabolisme bilirubin atau masalah hati."
+        return "Konsentrasi urobilinogen yang lebih tinggi dalam urine, menunjukkan masalah yang lebih serius dalam metabolisme bilirubin atau masalah hati."
     elif urobilinogrn_result == "12 (Pos)":
-        return "Konsentrasi urobilinogen yang tinggi dalam urine. Bisa menjadi tanda masalah serius dalam metabolisme bilirubin atau gangguan hati yang perlu penanganan medis lebih lanjut."
+        return "Konsentrasi urobilinogen yang tinggi dalam urine, bisa menjadi tanda masalah serius dalam metabolisme bilirubin atau gangguan hati yang perlu penanganan medis lebih lanjut."
 
 def predict_protein(protein_result):
     if protein_result == "NEGATIF":
         return " Biasanya, urin sehat tidak mengandung jumlah protein yang tinggi."
     elif protein_result == "+/-":
-        return "Ini bisa mengindikasikan adanya protein, masih dapat dianggap sebagai tanda kecil proteinuria."
+        return "Terindentifikasi adanya protein, masih dapat dianggap sebagai tanda kecil proteinuria."
     elif protein_result == "+":
-        return "Ini bisa mengindikasikan adanya proteinuria ringan, yang dapat terjadi dalam beberapa situasi, termasuk setelah aktivitas fisik intens atau demam."
+        return "Terindentifikasi adanya proteinuria ringan, yang dapat terjadi dalam beberapa situasi, termasuk setelah aktivitas fisik intens atau demam."
     elif protein_result == "++":
-        return "Ini menunjukkan adanya konsentrasi protein yang lebih tinggi dalam urin. Ini mungkin mengindikasikan adanya masalah kesehatan, seperti infeksi saluran kemih, tekanan darah tinggi, atau gangguan ginjal awal."
+        return "Terindentifikasi adanya konsentrasi protein yang lebih tinggi dalam urin. Ini mungkin mengindikasikan adanya masalah kesehatan, seperti infeksi saluran kemih, tekanan darah tinggi, atau gangguan ginjal awal."
     elif protein_result == "+++":
-        return "Ini menunjukkan tingkat protein yang lebih tinggi lagi dalam urin. Ini dapat mengindikasikan kondisi kesehatan yang lebih serius, seperti kerusakan ginjal yang lebih lanjut atau penyakit ginjal yang berpotensi lebih kompleks."
+        return "Terindentifikasi tingkat protein yang lebih tinggi lagi dalam urin. Ini dapat mengindikasikan kondisi kesehatan yang lebih serius, seperti kerusakan ginjal yang lebih lanjut atau penyakit ginjal yang berpotensi lebih kompleks."
     elif protein_result == "++++":
-        return "Ini indikasi serius dari masalah ginjal atau masalah kesehatan lainnya yang memengaruhi fungsi ginjal."
+        return "Terindentifikasi serius dari masalah ginjal atau masalah kesehatan lainnya yang memengaruhi fungsi ginjal."
 
 def predict_ph(ph_result):
     if ph_result == "5,0":
-        return "pH sangat asam, Ini mengindikasikan potensi masalah medis atau masalah diet tertentu."
+        return "pH sangat asam, mengindikasikan potensi masalah medis atau masalah diet tertentu."
     elif ph_result == "6,0":
         return "pH urin cenderung sedikit asam, tetapi masih berada dalam kisaran normal. Ini adalah kondisi umum dan biasanya tidak menimbulkan kekhawatiran besar."
     elif ph_result == "6,5":
@@ -62,9 +62,9 @@ def predict_ph(ph_result):
 
 def predict_blood(blood_result):
     if blood_result == "NEGATIF":
-        return "NEGATIF berarti tidak ada deteksi darah yang signifikan dalam urin. Ini mengindikasikan bahwa urin tidak mengandung darah dalam jumlah yang dapat dideteksi oleh tes ini."
+        return "Tidak ada deteksi darah yang signifikan dalam urin. Ini mengindikasikan bahwa urin tidak mengandung darah dalam jumlah yang dapat dideteksi oleh tes ini."
     elif blood_result == "+/-":
-        return "Ini menunjukkan adanya sedikit jumlah darah dalam urin. Ini bisa mengindikasikan adanya jejak darah, tetapi jumlahnya sangat kecil sehingga tidak terlihat secara visual."
+        return "Menunjukkan adanya sedikit jumlah darah dalam urin. Ini bisa mengindikasikan adanya jejak darah, tetapi jumlahnya sangat kecil sehingga tidak terlihat secara visual."
     elif blood_result == "+":
         return "Ini menunjukkan adanya darah dalam urin dalam jumlah sedikit. Ini bisa mengindikasikan adanya masalah seperti infeksi saluran kemih, batu ginjal, atau masalah lainnya yang mempengaruhi saluran kemih atau sistem ginjal."
     elif blood_result == "++":
@@ -94,7 +94,7 @@ def predict_specificgravity(specificgravity_result):
 
 def predict_ketone(ketone_result):
     if ketone_result == "NEGATIF":
-        return "Ini mengindikasikan bahwa urin tidak mengandung keton dalam jumlah yang dapat dideteksi oleh tes ini. Ini adalah hasil yang diharapkan dalam keadaan normal."
+        return "Ini mengindikasikan bahwa urin tidak mengandung keton. Ini adalah hasil dalam keadaan normal."
     elif ketone_result == "+/-":
         return "Ini bisa mengindikasikan bahwa tubuh mungkin sedang memecah lemak untuk energi, tetapi level keton masih dalam kisaran normal atau rendah."
     elif ketone_result == "+":

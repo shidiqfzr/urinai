@@ -15,16 +15,16 @@ def main():
     with st.sidebar:
             selected = option_menu(
                 menu_title="Main Menu",
-                options=["Analysis", "Chatbot"],
+                options=["Analisis", "Konsultasi"],
                 icons=["clipboard-plus", "robot"],
                 menu_icon="cast",
                 default_index=0
             )
 
-    if selected == "Analysis":
+    if selected == "Analisis":
         dipstick_analysis()
     
-    elif selected == "Chatbot":
+    elif selected == "Konsultasi":
         chatbot()
 
 if __name__ == "__main__":

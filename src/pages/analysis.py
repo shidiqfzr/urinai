@@ -84,7 +84,7 @@ def process_dipstick(image):
     return dipstick_result
 
 def dipstick_analysis():
-    st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Dipstick Analysis</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Dipstick Urinalisis</h1>", unsafe_allow_html=True)
     st.write("Unggah gambar dan dapatkan hasil")
 
     uploaded_image = st.file_uploader("Pilih gambar...", type=["jpg", "jpeg", "png"])
@@ -136,4 +136,4 @@ def dipstick_analysis():
             st.table(result_df)
     
     else:
-        st.warning("Masukkan hanya gambar dipstick yang telah dicrop")
+        st.warning("Masukkan hanya gambar dipstick urin yang telah dicrop")
