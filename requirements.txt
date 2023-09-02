@@ -5,3 +5,4 @@ numpy
 scikit-learn
 streamlit
 streamlit-option-menu
+libgl1
