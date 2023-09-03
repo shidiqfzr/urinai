@@ -92,7 +92,7 @@ def dipstick_analysis():
     if uploaded_image is not None:
         image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), 1)
 
-        st.write("Analysis Results:")
+        st.write("Hasil Analisis:")
 
         col1, col2 = st.columns([1, 10])
 
@@ -134,6 +134,8 @@ def dipstick_analysis():
             result_df.index = result_df.index + 1
             
             st.table(result_df)
+
+        st.info("Aplikasi ini hanya memberikan hasil prediksi. Disarankan untuk selalu berkonsultasi kepada ahli medis profesional", icon="ℹ️")
     
     else:
         st.warning("Masukkan hanya gambar dipstick urin yang telah dicrop")
