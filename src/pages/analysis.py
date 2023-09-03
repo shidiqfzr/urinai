@@ -87,7 +87,7 @@ def dipstick_analysis():
     st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Dipstick Urinalisis</h1>", unsafe_allow_html=True)
     st.write("Unggah gambar dan dapatkan hasil analisis")
 
-    uploaded_image = st.file_uploader("Pilih gambar...", type=["jpg", "jpeg", "png"])
+    uploaded_image = st.file_uploader("Pilih gambar", type=["jpg", "jpeg", "png"])
 
     if uploaded_image is not None:
         image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), 1)
