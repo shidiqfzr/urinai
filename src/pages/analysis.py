@@ -135,7 +135,7 @@ def dipstick_analysis():
             
             st.table(result_df)
 
-        st.info("Aplikasi ini hanya memberikan hasil prediksi. Disarankan untuk selalu berkonsultasi kepada ahli medis profesional", icon="ℹ️")
+        st.info("Aplikasi ini hanya memberikan hasil prediksi. Disarankan untuk selalu berkonsultasi kepada ahli medis profesional.", icon="ℹ️")
     
     else:
         st.warning("Masukkan hanya gambar dipstick urin yang telah dicrop")
