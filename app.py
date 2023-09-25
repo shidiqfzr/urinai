@@ -1,7 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from src.pages.analysis import dipstick_analysis
-from src.pages.chatbot import chatbot
+from src.pages.chatbot import chatbot, dipstick_analysis
 
 # hide_st_style = """ 
 #             <style>
