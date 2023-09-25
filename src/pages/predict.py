@@ -198,7 +198,7 @@ def process_dipstick(image):
 
         inputLAB = np.array([xLAB, yLAB, zLAB]).reshape(1, -1)
 
-        data = pd.read_csv('./src/csv/crop_' + str(nomor) + '.csv')  #
+        data = pd.read_csv('./src/csv/crop/crop_' + str(nomor) + '.csv')  #
 
         xLAB = np.array(data[['l', 'a', 'b']])  ###
         yLAB = np.array(data[['hasil']])
@@ -246,6 +246,8 @@ def dipstick_analysis():
             # Create a DataFrame for the results
             result_df = pd.DataFrame(result.items(), columns=["Parameter", "Value"])
             result_df['Value'] = result_df['Value'].apply(lambda x: x[0][0])  # Extracting the value from the 2D array
+
+            # data = get_result_df(result_df)
             
             result_df['Keterangan'] = result_df.apply(lambda row: predict_leukocyte(row['Value']) if row['Parameter'] == 'LEUKOSIT'
                                           else predict_nitrit(row['Value']) if row['Parameter'] == 'NITRIT'
