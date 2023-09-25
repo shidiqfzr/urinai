@@ -1,14 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from src.pages.chatbot import chatbot, dipstick_analysis
-
-# hide_st_style = """ 
-#             <style>
-#             #MainMenu {visibility: hidden;}
-#             footer {visibility: hidden;}
-#             </style>
-#             """
-# st.markdown(hide_st_style, unsafe_allow_html=True) # hide streamlit menu
+from src.pages.chatbot import chatbot
+from src.pages.predict import dipstick_analysis
 
 def main():
     with st.sidebar:
