@@ -85,7 +85,7 @@ def find_hospitals_nearby():
             folium.Marker([place_lat, place_lng], tooltip=name, popup=folium.Popup(html)).add_to(m)
 
     # Create a Pandas DataFrame from the hospital data
-    hospital_df = pd.DataFrame(hospital_data, columns=['Name', 'Address', 'Phone Number', 'Distance', 'Duration'])
+    hospital_df = pd.DataFrame(hospital_data, columns=['Nama', 'Alamat', 'Nomor Telepon', 'Jarak', 'Waktu Tempuh'])
     
     hospital_df.index = hospital_df.index + 1
 
