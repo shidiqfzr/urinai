@@ -27,6 +27,5 @@ def main():
     elif selected == "History":
         history()
 
-
 if __name__ == "__main__":
     main()
