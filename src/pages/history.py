@@ -2,23 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-def parsing_result(result):
-    formatted_data = []
-
-    # Iterate through the dictionary and format the data
-    for key, value in result.items():
-        # Extract the value from the nested array
-        if isinstance(value, np.ndarray):
-            value = value[0][0]
-        
-        formatted_data.append(f"{key}: {value}\n")
-
-    # Convert the formatted data to a single string
-    formatted_string = "\n".join(formatted_data)
-
-    print(formatted_string)
-    return formatted_string
-
 def add_to_history(result, image, time):
   data = pd.read_csv('./src/csv/history/history.csv')
 
