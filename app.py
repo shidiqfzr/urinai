@@ -9,8 +9,8 @@ def main():
     with st.sidebar:
             selected = option_menu(
                 menu_title="Main Menu",
-                options=["Analisis", "Konsultasi", "Map"],
-                icons=["clipboard-plus", "robot", "geo-alt"],
+                options=["Analisis", "Konsultasi", "Map", "History"],
+                icons=["clipboard-plus", "robot", "geo-alt", "list-task"],
                 menu_icon="cast",
                 default_index=0
             )
@@ -23,6 +23,9 @@ def main():
 
     elif selected == "Map":
         find_hospitals_nearby()
+
+    elif selected == "History":
+        history()
 
 
 if __name__ == "__main__":
