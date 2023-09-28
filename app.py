@@ -3,6 +3,7 @@ from streamlit_option_menu import option_menu
 from src.pages.chatbot import chatbot
 from src.pages.predict import dipstick_analysis
 from src.pages.map import find_hospitals_nearby
+from src.pages.history import history
 
 def main():
     with st.sidebar:

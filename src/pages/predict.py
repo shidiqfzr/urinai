@@ -3,6 +3,9 @@ import cv2
 import pandas as pd
 import numpy as np
 from sklearn import neighbors
+from datetime import datetime
+
+from src.pages.history import add_to_history
 
 def predict_leukocyte(leukocyte_result):
     if leukocyte_result == "NEGATIF":
@@ -222,6 +225,7 @@ def dipstick_analysis():
     uploaded_image = st.file_uploader("Pilih gambar", type=["jpg", "jpeg", "png"])
 
     if uploaded_image is not None:
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), 1)
 
         st.write("Hasil Analisis:")
@@ -242,6 +246,8 @@ def dipstick_analysis():
 
         with col2:
             result = process_dipstick(image)
+
+            add_to_history(result, image, current_time)
 
             # Create a DataFrame for the results
             result_df = pd.DataFrame(result.items(), columns=["Parameter", "Value"])
