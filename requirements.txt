@@ -1,7 +1,10 @@
+folium==0.14.0
+googlemaps==4.10.0
 numpy==1.23.4
 openai==0.27.8
 opencv_python==4.6.0.66
 pandas==1.4.4
 scikit_learn==1.1.2
 streamlit==1.25.0
+streamlit_folium==0.14.0
 streamlit_option_menu==0.3.4
