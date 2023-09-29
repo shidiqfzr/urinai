@@ -17,10 +17,10 @@ def find_hospitals_nearby():
     user_latitude = float(location[0])
     user_longitude = float(location[1])
 
-    gmaps.api_key = st.secrets["GMAPS_API_KEY"]
+    gmaps_api_key = st.secrets["GMAPS_API_KEY"]
 
     # Initialize the Google Maps client with your API key
-    gmaps = googlemaps.Client(key=gmaps.api_key)
+    gmaps = googlemaps.Client(key=gmaps_api_key)
 
     # Search for hospitals near your specified location
     places = gmaps.places_nearby(
