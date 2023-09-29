@@ -9,8 +9,8 @@ def main():
     with st.sidebar:
             selected = option_menu(
                 menu_title="Main Menu",
-                options=["Analisis", "Konsultasi", "Map", "History"],
-                icons=["clipboard-plus", "robot", "geo-alt", "list-task"],
+                options=["Analisis", "History", "Konsultasi", "Map"],
+                icons=["clipboard-plus", "list-task", "robot", "geo-alt"],
                 menu_icon="cast",
                 default_index=0
             )
