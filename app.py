@@ -18,14 +18,15 @@ def main():
     if selected == "Analisis":
         dipstick_analysis()
     
+    elif selected == "History":
+        history()
+    
     elif selected == "Konsultasi":
         chatbot()
 
     elif selected == "Map":
         find_hospitals_nearby()
 
-    elif selected == "History":
-        history()
 
 if __name__ == "__main__":
     main()
