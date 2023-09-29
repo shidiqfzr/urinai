@@ -22,4 +22,4 @@ def history():
   st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Riwayat Analisis</h1>", unsafe_allow_html=True)
   data = pd.read_csv('./src/csv/history/history.csv')
   history_data = pd.DataFrame(data)
-  st.table(history_data)
+  st.dataframe(history_data)
