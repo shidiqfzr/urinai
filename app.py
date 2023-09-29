@@ -9,7 +9,7 @@ def main():
     with st.sidebar:
             selected = option_menu(
                 menu_title="Main Menu",
-                options=["Analisis", "History", "Konsultasi", "Map"],
+                options=["Analisis", "Riwayat", "Konsultasi", "Map"],
                 icons=["clipboard-plus", "list-task", "robot", "geo-alt"],
                 menu_icon="cast",
                 default_index=0
@@ -18,7 +18,7 @@ def main():
     if selected == "Analisis":
         dipstick_analysis()
     
-    elif selected == "History":
+    elif selected == "Riwayat":
         history()
     
     elif selected == "Konsultasi":
