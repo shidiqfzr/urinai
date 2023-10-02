@@ -16,6 +16,15 @@ def add_to_history(result, image, time):
 
   # Save the updated data back to the CSV file without index column
   updated_data.to_csv('./src/csv/history/history.csv', index=False)
+
+def delete_data_history():
+  # Load the CSV data (assuming you have a CSV file named 'data.csv' with headers)
+  df = pd.read_csv('./src/csv/history/history.csv')
+
+  df_header = df.iloc[:0]
+
+  # Save the updated DataFrame back to the CSV file (excluding the index)
+  df_header.to_csv('./src/csv/history/history.csv', index=False)
   
 # Function to display the history
 def history():
@@ -23,3 +32,5 @@ def history():
   data = pd.read_csv('./src/csv/history/history.csv')
   history_data = pd.DataFrame(data)
   st.dataframe(history_data)
+  if st.button("Delete Data"):
+    delete_data_history()
