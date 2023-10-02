@@ -5,17 +5,24 @@ from streamlit_folium import folium_static
 import streamlit as st
 import googlemaps
 import pandas as pd
+from streamlit_js_eval import get_geolocation
 
 def find_hospitals_nearby():
     # Fetch location data using ipinfo.io
-    url = 'https://ipinfo.io/json'
-    response = urlopen(url)
-    data = json.load(response)
 
-    # Extract latitude and longitude
-    location = data['loc'].split(',')
-    user_latitude = float(location[0])
-    user_longitude = float(location[1])
+    # url = 'https://ipinfo.io/json'
+    # response = urlopen(url)
+    # data = json.load(response)
+
+    # location = data['loc'].split(',')
+    # user_latitude = float(location[0])
+    # user_longitude = float(location[1])
+
+    # Fetch location data using get_geolocation
+    location = get_geolocation()
+
+    user_latitude = location['coords']['latitude']
+    user_longitude = location['coords']['longitude']
 
     gmaps_api_key = st.secrets["GMAPS_API_KEY"]
 
