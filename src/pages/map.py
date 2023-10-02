@@ -33,7 +33,7 @@ def find_hospitals_nearby():
     places = gmaps.places_nearby(
         location=(user_latitude, user_longitude),
         keyword='hospital',
-        radius=10000  # You can adjust the radius as needed
+        radius=5000  # You can adjust the radius as needed
     )
 
     # Create a Folium map centered on your specified location
@@ -92,7 +92,7 @@ def find_hospitals_nearby():
             folium.Marker([place_lat, place_lng], tooltip=name, popup=folium.Popup(html)).add_to(m)
 
     # Create a Pandas DataFrame from the hospital data
-    hospital_df = pd.DataFrame(hospital_data, columns=['Nama', 'Alamat', 'Nomor Telepon', 'Jarak', 'Waktu Tempuh'])
+    hospital_df = pd.DataFrame(hospital_data, columns=['Nama', 'Alamat', 'Kontak', 'Jarak', 'Waktu Tempuh'])
     
     hospital_df.index = hospital_df.index + 1
 
