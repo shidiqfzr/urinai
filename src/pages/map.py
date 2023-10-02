@@ -33,7 +33,7 @@ def find_hospitals_nearby():
     places = gmaps.places_nearby(
         location=(user_latitude, user_longitude),
         keyword='hospital',
-        radius=1000  # You can adjust the radius as needed
+        radius=10000  # You can adjust the radius as needed
     )
 
     # Create a Folium map centered on your specified location
