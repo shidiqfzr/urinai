@@ -47,7 +47,7 @@ def find_hospitals_nearby():
 
     # Add a marker for the user's location with the custom icon
     folium.Marker(
-        [user_latitude, user_longitude],
+        [user_latitude, user_longitude],  
         icon=user_icon,
         tooltip='Your Location'
     ).add_to(m)
@@ -63,7 +63,7 @@ def find_hospitals_nearby():
         hospital_location = (place_lat, place_lng)
 
         # Use the Google Maps API to find the distance and duration
-        distance_matrix = gmaps.distance_matrix(user_location, hospital_location, mode="walking")  # You can adjust the mode
+        distance_matrix = gmaps.distance_matrix(user_location, hospital_location, mode="driving")  # You can adjust the mode
 
         if distance_matrix['status'] == 'OK':
             distance = distance_matrix['rows'][0]['elements'][0]['distance']['text']
@@ -97,7 +97,7 @@ def find_hospitals_nearby():
     hospital_df.index = hospital_df.index + 1
 
     # Display the map with hospital markers in Streamlit
-    st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Lokasi Rumah Sakit</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Lokasi Rumah Sakit Terdekat</h1>", unsafe_allow_html=True)
     folium_static(m, width=700, height=500)
 
     # Display the table with hospital details
