@@ -32,5 +32,5 @@ def history():
   data = pd.read_csv('./src/csv/history/history.csv')
   history_data = pd.DataFrame(data)
   st.dataframe(history_data)
-  if st.button("Delete Data"):
+  if st.button("Hapus Riwayat"):
     delete_data_history()
