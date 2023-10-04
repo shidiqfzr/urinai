@@ -5,7 +5,14 @@ def is_health_related(prompt):
     health_keywords = ["kesehatan", "penyakit", "sakit", "dokter", "rumah sakit", "obat", "sakit", "gizi", "bugar", "makanan sehat", 
                        "pola makan", "kencing", "pipis", "olahraga", "imunisasi", "vaksinasi","vaksin","imun","stress","diet","nutrisi",
                        "mencegah kencing","mencegah diabetes","diabetes", "kolesterol", "darah", "tekanan darah", "pemeriksaan", "diperiksa", 
-                       "reproduksi", "air bersih", "air seni", "kebersihan", "bersih", "pengobatan", "terapi", "fisik", "tidur", "pemulihan", "nutrisi"]
+                       "reproduksi", "air bersih", "air seni", "kebersihan", "bersih", "pengobatan", "terapi", "fisik", "tidur", "pemulihan", 
+                       "nutrisi", "urin", "leukosit", "nitrit", "urobilinogen", "protein", "ph", "darah", "ketone", "bilirubin", "glukosa",
+                       "tubuh", "dipstik", "dipstick", "sehat", "stres", "penyebab", "berat badan", "berat","badan","diabet","gejala", "kebal",
+                       "kekebalan","asma","tekanan","keto","cegukan","flu","ginjal","kolestrol","makan","minum","minuman","kalori","sindrom","transplantasi",
+                       "bau","berbau","hematuria","bak","bab","buang air kecil","buang","air","medis","bantuan","infeksi","saluran","kemih","radang",
+                       "sistitis","kandung","polikistik","kanker","prostat","prostatis","kista","nefrotik","hipertensi","hipotensi","impoten","disfungsi",
+                       "ereksi","uretra","inkontinensia","retensi","nefritis","gangguan","endometriosis","rvu","refluks","vesikoureteral","uretritis",
+                       "pielonefritis","kronis","vesika","rekti","papillon","lefevre","alport"]    
 
     prompt_lower = prompt.lower()
     for keyword in health_keywords:
