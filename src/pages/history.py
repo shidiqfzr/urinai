@@ -5,14 +5,15 @@ import numpy as np
 def add_to_history(result, image, time):
   data = pd.read_csv('./src/csv/history/history.csv')
 
-  df = pd.DataFrame(result.items()).T
-  df.columns = df.iloc[0]
-  df = df[1:]
-  df = df.apply(lambda x: x.str[0] if x.dtype == 'object' else x)
-  df.insert(0, 'Times', time)
+  result_df = pd.DataFrame(result.items(), columns=["Parameter", "Value"])
+  result_df['Value'] = result_df['Value'].apply(lambda x: x[0][0])
+  result_df = result_df.T
+  result_df.columns = result_df.iloc[0]
+  result_df = result_df[1:]
+  result_df.insert(0, 'Times', time)
 
   # Concatenate the existing DataFrame with the new data DataFrame, excluding the "time" column from new_data
-  updated_data = pd.concat([data, df], ignore_index=True)
+  updated_data = pd.concat([data, result_df], ignore_index=True)
 
   # Save the updated data back to the CSV file without index column
   updated_data.to_csv('./src/csv/history/history.csv', index=False)
