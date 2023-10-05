@@ -9,3 +9,4 @@ streamlit==1.25.0
 streamlit_folium==0.14.0
 streamlit_option_menu==0.3.4
 streamlit_js_eval==0.1.5
+matplotlib==3.8.0
