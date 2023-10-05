@@ -170,7 +170,7 @@ def analysis_result(data):
         fig, ax = plt.subplots(figsize=(1, 1), facecolor='none')  # Set the figure size and background color to transparent
 
         # Define text properties, including fontsize and color (white)
-        text_props = {'fontsize': 7, 'color': 'white'}
+        text_props = {'fontsize': 8, 'color': 'white'}
 
         # colors = ['blue', 'orange']
 
