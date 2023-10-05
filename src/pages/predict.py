@@ -87,64 +87,95 @@ def process_dipstick(image):
         
     return dipstick_result
 
+def pre_analysis():
+    with st.expander("Ikuti langkah berikut ini untuk melakukan analisis"):
+        st.write("""
+                 1. Persiapkan Wadah Urin: Siapkan wadah urin yang bersih dan kering.
+                 2. Kumpulkan Sampel: Ambil sampel urin ke dalam wadah. Pastikan jumlahnya cukup.
+                 3. Celupkan Dipstick: Masukkan ujung strip tes urin (dipstick) ke dalam wadah urin.
+                 4. Tunggu Sebentar: Biarkan selama beberapa detik sesuai petunjuk.
+                 5. Scan: Foto hasil disptick urin dengan pencahayaan yang baik.
+                 6. Upload: Kirim hanya foto dipstick urin yang telah dicrop.
+                 """)
+
+    agree = st.checkbox("Saya mengerti")
+
+
 def dipstick_analysis():
     st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Dipstick Urinalisis</h1>", unsafe_allow_html=True)
-    st.write("Unggah gambar dan dapatkan hasil analisis")
 
-    uploaded_image = st.file_uploader("Pilih gambar", type=["jpg", "jpeg", "png"])
+    with st.expander("Langkah-langkah melakukan analisis"):
+        st.write("""
+                1. **Persiapkan Wadah Urin:** Siapkan wadah urin yang bersih dan kering.
+                2. **Kumpulkan Sampel:** Ambil sampel urin ke dalam wadah. Pastikan jumlahnya cukup.
+                3. **Celupkan Dipstick:** Masukkan ujung strip tes urin (dipstick) ke dalam wadah urin.
+                4. **Tunggu Sebentar:** Biarkan selama beberapa detik sesuai petunjuk agar dipstick bisa bereaksi dengan urin.
+                5. **Scan:** Gunakan kamera ponsel untuk mengambil foto dipstick urin. Pastikan pencahayaan cukup baik.
+                6. **Upload:** Unggah foto dipstick urin yang telah dicrop.
+                """)
 
-    if uploaded_image is not None:
-        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), 1)
+    agree = st.checkbox("Saya mengerti")
 
-        st.write("Hasil Analisis:")
+    if not agree:
+        st.info("Pahami dan Ikuti lagkah-langkah diatas sebelum melakukan analisis")
 
-        col1, col2 = st.columns([1, 10])
+    if agree:
+        st.write("Unggah gambar dan dapatkan hasil analisis")
 
+        uploaded_image = st.file_uploader("Pilih gambar", type=["jpg", "jpeg", "png"])
+
+        if uploaded_image is not None:
+            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), 1)
+
+            st.write("Hasil Analisis:")
+
+            col1, col2 = st.columns([1, 10])
+
+            
+            with col1:
+                # Process the image and draw rectangles
+                image = rectangle(image)
+            
+                # Convert BGR image to RGB format
+                rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                
+                # Display the RGB image
+                st.image(rgb_image)
+                
+
+            with col2:
+                result = process_dipstick(image)
+
+                add_to_history(result, image, current_time)
+
+                # Create a DataFrame for the results
+                result_df = pd.DataFrame(result.items(), columns=["Parameter", "Value"])
+                result_df['Value'] = result_df['Value'].apply(lambda x: x[0][0])  # Extracting the value from the 2D array
+                
+                result_df['Keterangan'] = result_df.apply(lambda row: predict_leukocyte(row['Value'])[0] if row['Parameter'] == 'LEUKOSIT'
+                                            else predict_nitrit(row['Value'])[0] if row['Parameter'] == 'NITRIT'
+                                            else predict_urobilinogen(row['Value'])[0] if row['Parameter'] == 'UROBILINOGEN'
+                                            else predict_protein(row['Value'])[0] if row['Parameter'] == 'PROTEIN'
+                                            else predict_ph(row['Value'])[0] if row['Parameter'] == 'pH'
+                                            else predict_blood(row['Value'])[0] if row['Parameter'] == 'BLOOD'
+                                            else predict_specificgravity(row['Value'])[0] if row['Parameter'] == 'SG'
+                                            else predict_ketone(row['Value'])[0] if row['Parameter'] == 'KETON'
+                                            else predict_bilirubin(row['Value'])[0] if row['Parameter'] == 'BILIRUBIN'
+                                            else predict_glukosa(row['Value'])[0] if row['Parameter'] == 'GLUKOSA'
+                                            else "", axis=1)
+
+
+                # Convert the 'Value' column to string
+                result_df['Value'] = result_df['Value'].astype(str)
+                
+                result_df.index = result_df.index + 1
+                
+                st.table(result_df)
+
+            analysis_result(result)
+
+            st.info("Aplikasi ini hanya memberikan hasil prediksi. Disarankan untuk selalu berkonsultasi kepada ahli medis profesional.", icon="ℹ️")
         
-        with col1:
-            # Process the image and draw rectangles
-            image = rectangle(image)
-        
-            # Convert BGR image to RGB format
-            rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            
-            # Display the RGB image
-            st.image(rgb_image)
-            
-
-        with col2:
-            result = process_dipstick(image)
-
-            add_to_history(result, image, current_time)
-
-            # Create a DataFrame for the results
-            result_df = pd.DataFrame(result.items(), columns=["Parameter", "Value"])
-            result_df['Value'] = result_df['Value'].apply(lambda x: x[0][0])  # Extracting the value from the 2D array
-            
-            result_df['Keterangan'] = result_df.apply(lambda row: predict_leukocyte(row['Value'])[0] if row['Parameter'] == 'LEUKOSIT'
-                                          else predict_nitrit(row['Value'])[0] if row['Parameter'] == 'NITRIT'
-                                          else predict_urobilinogen(row['Value'])[0] if row['Parameter'] == 'UROBILINOGEN'
-                                          else predict_protein(row['Value'])[0] if row['Parameter'] == 'PROTEIN'
-                                          else predict_ph(row['Value'])[0] if row['Parameter'] == 'pH'
-                                          else predict_blood(row['Value'])[0] if row['Parameter'] == 'BLOOD'
-                                          else predict_specificgravity(row['Value'])[0] if row['Parameter'] == 'SG'
-                                          else predict_ketone(row['Value'])[0] if row['Parameter'] == 'KETON'
-                                          else predict_bilirubin(row['Value'])[0] if row['Parameter'] == 'BILIRUBIN'
-                                          else predict_glukosa(row['Value'])[0] if row['Parameter'] == 'GLUKOSA'
-                                          else "", axis=1)
-
-
-            # Convert the 'Value' column to string
-            result_df['Value'] = result_df['Value'].astype(str)
-            
-            result_df.index = result_df.index + 1
-            
-            st.table(result_df)
-
-        analysis_result(result)
-
-        st.info("Aplikasi ini hanya memberikan hasil prediksi. Disarankan untuk selalu berkonsultasi kepada ahli medis profesional.", icon="ℹ️")
-    
-    else:
-        st.warning("Masukkan hanya gambar dipstick urin yang telah dicrop")
+        else:
+            st.warning("Masukkan hanya gambar dipstick urin yang telah dicrop")
