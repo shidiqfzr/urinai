@@ -100,7 +100,7 @@ def dipstick_analysis():
                 6. **Upload:** Unggah foto dipstick urin yang telah dicrop.
                 """)
 
-    agree = st.checkbox("Saya mengerti")
+        agree = st.checkbox("Saya mengerti")
 
     if not agree:
         st.info("Pahami dan Ikuti lagkah-langkah diatas sebelum melakukan analisis")
@@ -160,7 +160,7 @@ def dipstick_analysis():
                 st.table(result_df)
                 
             st.divider()
-            
+
             analysis_result(result)
 
             st.info("Aplikasi ini hanya memberikan hasil prediksi. Disarankan untuk selalu berkonsultasi kepada ahli medis profesional.", icon="ℹ️")
