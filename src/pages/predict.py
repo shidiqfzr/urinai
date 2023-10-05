@@ -87,20 +87,6 @@ def process_dipstick(image):
         
     return dipstick_result
 
-def pre_analysis():
-    with st.expander("Ikuti langkah berikut ini untuk melakukan analisis"):
-        st.write("""
-                 1. Persiapkan Wadah Urin: Siapkan wadah urin yang bersih dan kering.
-                 2. Kumpulkan Sampel: Ambil sampel urin ke dalam wadah. Pastikan jumlahnya cukup.
-                 3. Celupkan Dipstick: Masukkan ujung strip tes urin (dipstick) ke dalam wadah urin.
-                 4. Tunggu Sebentar: Biarkan selama beberapa detik sesuai petunjuk.
-                 5. Scan: Foto hasil disptick urin dengan pencahayaan yang baik.
-                 6. Upload: Kirim hanya foto dipstick urin yang telah dicrop.
-                 """)
-
-    agree = st.checkbox("Saya mengerti")
-
-
 def dipstick_analysis():
     st.markdown("<h1 style='text-align: center; margin-bottom: 1em;'>Dipstick Urinalisis</h1>", unsafe_allow_html=True)
 
@@ -172,7 +158,9 @@ def dipstick_analysis():
                 result_df.index = result_df.index + 1
                 
                 st.table(result_df)
-
+                
+            st.divider()
+            
             analysis_result(result)
 
             st.info("Aplikasi ini hanya memberikan hasil prediksi. Disarankan untuk selalu berkonsultasi kepada ahli medis profesional.", icon="ℹ️")

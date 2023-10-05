@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def predict_leukocyte(leukocyte_result):
     if leukocyte_result == "NEGATIF":
@@ -134,35 +135,63 @@ def predict_glukosa(glukosa_result):
         return ["Ini mengindikasikan adanya kadar glukosa darah yang sangat tinggi, yang bisa sangat serius dan mengindikasikan kondisi diabetes yang perlu ditangani dengan cepat.", 0]
 
 def analysis_result(data):
-  result_df = pd.DataFrame(data.items(), columns=["Parameter", "Value"])
-  result_df['Value'] = result_df['Value'].apply(lambda x: x[0][0])
+    result_df = pd.DataFrame(data.items(), columns=["Parameter", "Value"])
+    result_df['Value'] = result_df['Value'].apply(lambda x: x[0][0])
 
-  params = {
-    'LEUKOSIT': predict_leukocyte(result_df.loc[result_df['Parameter'] == 'LEUKOSIT', 'Value'].values[0] if 'LEUKOSIT' in result_df['Parameter'].values else "")[1],
-    'NITRIT' : predict_nitrit(result_df.loc[result_df['Parameter'] == 'NITRIT', 'Value'].values[0] if 'NITRIT' in result_df['Parameter'].values else "")[1],
-    'UROBILINOGEN' : predict_urobilinogen(result_df.loc[result_df['Parameter'] == 'UROBILINOGEN', 'Value'].values[0] if 'UROBILINOGEN' in result_df['Parameter'].values else "")[1],
-    'PROTEIN' : predict_protein(result_df.loc[result_df['Parameter'] == 'PROTEIN', 'Value'].values[0] if 'PROTEIN' in result_df['Parameter'].values else "")[1],
-    'pH' : predict_ph(result_df.loc[result_df['Parameter'] == 'pH', 'Value'].values[0] if 'pH' in result_df['Parameter'].values else "")[1],
-    'BLOOD' : predict_blood(result_df.loc[result_df['Parameter'] == 'BLOOD', 'Value'].values[0] if 'BLOOD' in result_df['Parameter'].values else "")[1],
-    'SG' : predict_specificgravity(result_df.loc[result_df['Parameter'] == 'SG', 'Value'].values[0] if 'SG' in result_df['Parameter'].values else "")[1],
-    'KETON' : predict_ketone(result_df.loc[result_df['Parameter'] == 'KETON', 'Value'].values[0] if 'KETON' in result_df['Parameter'].values else "")[1],
-    'BILIRUBIN' : predict_bilirubin(result_df.loc[result_df['Parameter'] == 'BILIRUBIN', 'Value'].values[0] if 'BILIRUBIN' in result_df['Parameter'].values else "")[1],
-    'GLUKOSA' : predict_glukosa(result_df.loc[result_df['Parameter'] == 'GLUKOSA', 'Value'].values[0] if 'GLUKOSA' in result_df['Parameter'].values else "")[1],
-  }
-  sums = 0
-  notone = []
+    params = {
+        'LEUKOSIT': predict_leukocyte(result_df.loc[result_df['Parameter'] == 'LEUKOSIT', 'Value'].values[0] if 'LEUKOSIT' in result_df['Parameter'].values else "")[1],
+        'NITRIT' : predict_nitrit(result_df.loc[result_df['Parameter'] == 'NITRIT', 'Value'].values[0] if 'NITRIT' in result_df['Parameter'].values else "")[1],
+        'UROBILINOGEN' : predict_urobilinogen(result_df.loc[result_df['Parameter'] == 'UROBILINOGEN', 'Value'].values[0] if 'UROBILINOGEN' in result_df['Parameter'].values else "")[1],
+        'PROTEIN' : predict_protein(result_df.loc[result_df['Parameter'] == 'PROTEIN', 'Value'].values[0] if 'PROTEIN' in result_df['Parameter'].values else "")[1],
+        'pH' : predict_ph(result_df.loc[result_df['Parameter'] == 'pH', 'Value'].values[0] if 'pH' in result_df['Parameter'].values else "")[1],
+        'BLOOD' : predict_blood(result_df.loc[result_df['Parameter'] == 'BLOOD', 'Value'].values[0] if 'BLOOD' in result_df['Parameter'].values else "")[1],
+        'SG' : predict_specificgravity(result_df.loc[result_df['Parameter'] == 'SG', 'Value'].values[0] if 'SG' in result_df['Parameter'].values else "")[1],
+        'KETON' : predict_ketone(result_df.loc[result_df['Parameter'] == 'KETON', 'Value'].values[0] if 'KETON' in result_df['Parameter'].values else "")[1],
+        'BILIRUBIN' : predict_bilirubin(result_df.loc[result_df['Parameter'] == 'BILIRUBIN', 'Value'].values[0] if 'BILIRUBIN' in result_df['Parameter'].values else "")[1],
+        'GLUKOSA' : predict_glukosa(result_df.loc[result_df['Parameter'] == 'GLUKOSA', 'Value'].values[0] if 'GLUKOSA' in result_df['Parameter'].values else "")[1],
+    }
+    sums = 0
+    notone = []
 
-  for variable_name, variable_value in params.items():
-    if variable_value == 1:
-        sums += 1
-    elif variable_value != 1:
-        notone.append(variable_name)
+    for variable_name, variable_value in params.items():
+        if variable_value == 1:
+            sums += 1
+        elif variable_value != 1:
+            notone.append(variable_name)
 
-  if sums == 10:
-      st.write("Dari 10 parameter yang disebutkan, semuanya memiliki hasil negatif atau dalam kisaran normal. Ini adalah tanda positif bahwa seluruh komponen dalam urin Anda tidak menunjukkan adanya masalah kesehatan yang signifikan dalam hal parameter-parameter tersebut.")
-  
-  elif sums >= 7:
-      st.write(f"Sebagian besar parameter urin Anda tampak normal berdasarkan hasil yang Anda berikan. Dari 10 parameter yang disebutkan, {sums} di antaranya memiliki hasil negatif atau dalam kisaran normal. Parameter yang tidak negatif diantaranya adalah {', '.join(notone)}")
-  
-  elif sums < 7:
-      st.write(f"Dari 10 parameter yang disebutkan, hanya {sums} yang memiliki hasil negatif atau dalam kisaran normal. Parameter yang tidak negatif diantaranya adalah {', '.join(notone)}. Ini mungkin mengindikasikan adanya masalah kesehatan yang perlu diperhatikan dalam hal parameter-parameter tersebut.")
+    
+    col1, col2 = st.columns([1, 2])
+
+    with col1:
+        labels = ['Normal', 'Tidak Normal']
+        sizes = [sums, 10 - sums]  # These values should add up to 100
+
+        # Create a smaller donut chart with a transparent background
+        fig, ax = plt.subplots(figsize=(1, 1), facecolor='none')  # Set the figure size and background color to transparent
+
+        # Define text properties, including fontsize and color (white)
+        text_props = {'fontsize': 7, 'color': 'white'}
+
+        # colors = ['blue', 'orange']
+
+        ax.pie(sizes, labels=labels, autopct='%1.0f%%', startangle=90, wedgeprops=dict(width=0.5), textprops=text_props)  # Adjust fontsize, color, and specify colors
+
+        # Add a smaller circle at the center to transform it into a smaller donut chart
+        circle = plt.Circle((0, 0), 0.3, color='none')
+        fig.gca().add_artist(circle)
+
+        # Set aspect ratio to be equal
+        ax.axis('equal')
+
+        # Display the smaller donut chart using Streamlit
+        st.pyplot(fig)
+    
+    with col2:
+        if sums == 10:
+            st.write("Dari 10 parameter yang disebutkan, semuanya memiliki hasil negatif atau dalam kisaran normal. Ini adalah tanda positif bahwa seluruh komponen dalam urin Anda tidak menunjukkan adanya masalah kesehatan yang signifikan dalam hal parameter-parameter tersebut.")
+        
+        elif sums >= 7:
+            st.write(f"Sebagian besar parameter urin Anda tampak normal berdasarkan hasil analisis yang diberikan. Dari 10 parameter yang disebutkan, {sums} di antaranya memiliki hasil negatif atau dalam kisaran normal. Parameter yang tidak negatif diantaranya adalah {', '.join(notone)}")
+        
+        elif sums < 7:
+            st.write(f"Dari 10 parameter yang disebutkan, hanya {sums} yang memiliki hasil negatif atau dalam kisaran normal. Parameter yang tidak negatif diantaranya adalah {', '.join(notone)}. Ini mungkin mengindikasikan adanya masalah kesehatan yang perlu diperhatikan dalam hal parameter-parameter tersebut.")
